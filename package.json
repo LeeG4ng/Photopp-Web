@@ -1,0 +1,25 @@
+{
+  "name": "photopp-web",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LeeG4ng/Photopp-Web.git"
+  },
+  "keywords": [
+    "990625Lg"
+  ],
+  "author": "LG",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/LeeG4ng/Photopp-Web/issues"
+  },
+  "homepage": "https://github.com/LeeG4ng/Photopp-Web#readme",
+  "dependencies": {
+    "express": "^4.16.3"
+  }
+}
