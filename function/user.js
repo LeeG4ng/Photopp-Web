@@ -18,6 +18,7 @@ var login = function(username, password) {
                     if(inserterr) throw inserterr;
                     console.log(`注册成功：%,%`, username, password);
                 })
+                return({'err':null, 'jwt':null});
             }
             db.close();
         })
