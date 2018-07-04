@@ -17,8 +17,9 @@ var register = function(username, password) {
         var col = dbase.collection('user');
         col.find({'username':username}).toArray(function(err, results) {
             if (err) throw err;
-            if(results.length) {//用户名已存在
+            if(results.length > 0) {//用户名已存在
                 res = {'err':'用户名已存在！', 'jwt':null};
+                console.log('用户名已存在');
             } else {
                 col.insertOne({'username':username, 'password':password}, function(inserterr, res) {
                     if(inserterr) throw inserterr;
