@@ -24,7 +24,7 @@ router.post('/register', function(req, res, next) {
         var dbase = db.db('Photopp');
         console.log('db connected');
         var col = dbase.collection('user');
-        col.find({'username':username}).toArray(function(err, results) {
+        col.find({'username':req.body['username']}).toArray(function(err, results) {
             if (err) throw err;
             if(results.length > 0) {//用户名已存在
                 res.status(403).json({'error':'用户名已存在','jwt':null});
