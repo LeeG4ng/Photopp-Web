@@ -7,5 +7,7 @@ image {
 }
 
 表
-faceid face_token
+image:username id face_token faceid locid
+face:faceid face_token
+location:locid location
 
