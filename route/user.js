@@ -30,9 +30,9 @@ router.post('/register', function(req, res, next) {
                 res.status(403).json({'error':'用户名已存在','jwt':null});
             } else {
                 console.log('可注册');
-                col.insertOne({'username':username, 'password':password}, function(inserterr, res) {
+                col.insertOne({'username':req.body['username'], 'password':req.body['password']}, function(inserterr, res) {
                     if(inserterr) throw inserterr;
-                    console.log('注册成功：'+username+' '+password);
+                    console.log('注册成功：'+req.body['username']+' '+req.body['password']);
                 })
                 res.send({'error':null, 'jwt':null});
             }
