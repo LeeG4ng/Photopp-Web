@@ -17,7 +17,7 @@ router.post('/login', function(req, res, next) {
 
 router.post('/register', function(req, res, next) {
     console.log('/user/register');
-    console.log(req.query);
+    console.log(req.params);
 
     var msg = userFunction.register(req.query['username'], req.query['password']);
     if (msg['err']) {//错误
