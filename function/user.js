@@ -21,6 +21,7 @@ var register = function(username, password) {
                 res = {'err':'用户名已存在！', 'jwt':null};
                 console.log('用户名已存在');
             } else {
+                console.log('可注册');
                 col.insertOne({'username':username, 'password':password}, function(inserterr, res) {
                     if(inserterr) throw inserterr;
                     console.log('注册成功：'+username+' '+password);
