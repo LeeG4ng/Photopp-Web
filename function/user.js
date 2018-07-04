@@ -9,6 +9,7 @@ var login = function(username, password) {
 exports.login = login;
 
 var register = function(username, password) {
+    var res = {};
     MongoClient.connect(url, function(err, db) {
         if(err) throw err;
         var dbase = db.db('Photopp');
@@ -17,16 +18,17 @@ var register = function(username, password) {
         col.find({'username':username}).toArray(function(err, results) {
             if (err) throw err;
             if(results.length) {//用户名已存在
-                return({'err':'用户名已存在！', 'jwt':null});
+                res = {'err':'用户名已存在！', 'jwt':null};
             } else {
                 col.insertOne({'username':username, 'password':password}, function(inserterr, res) {
                     if(inserterr) throw inserterr;
-                    console.log(`注册成功：%,%`, username, password);
+                    console.log('注册成功：'+username+' '+password);
                 })
-                return({'err':null, 'jwt':null});
+                res = {'err':null, 'jwt':null};
             }
             db.close();
         })
     });
+    return res;
 };
 exports.register = register;
