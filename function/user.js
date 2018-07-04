@@ -4,6 +4,11 @@ var url = 'mongodb://127.0.0.1:27017';
 
 
 var login = function(username, password) {
+    
+};
+exports.login = login;
+
+var register = function(username, password) {
     MongoClient.connect(url, function(err, db) {
         if(err) throw err;
         var dbase = db.db('Photopp');
@@ -22,13 +27,6 @@ var login = function(username, password) {
             }
             db.close();
         })
-    });
-};
-exports.login = login;
-
-var register = function(username, password) {
-    MongoClient.connect(url, function(err, db) {
-        if(err) throw err;
     });
 };
 exports.register = register;
