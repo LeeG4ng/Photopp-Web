@@ -27,6 +27,7 @@ router.post('/register', function(req, res, next) {
         col.find({'username':req.body['username']}).toArray(function(err, results) {
             if (err) throw err;
             if(results.length > 0) {//用户名已存在
+                console.log('用户名已存在');
                 res.status(403).json({'error':'用户名已存在','jwt':null});
             } else {
                 console.log('可注册');
