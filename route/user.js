@@ -19,13 +19,9 @@ router.post('/register', function(req, res, next) {
     console.log('/user/register');
     console.log(req.body);
 
-    var msg = userFunction.register(req.body['username'], req.body['password']);
+    var msg = userFunction.register(req.body['username'], req.body['password'], res);
     console.log(msg);
-    if (msg['err']) {//错误
-        res.status(403).send(msg['err']);
-    } else {//正确send jwt
-        res.send();
-    }
+    
 });
 
 module.exports = router;
