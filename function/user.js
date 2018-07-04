@@ -31,7 +31,7 @@ var register = function(username, password) {
             db.close();
         })
     });
-    while (res == {}) {}
+    while (res === {}) {}
     return res;
 };
 exports.register = register;
