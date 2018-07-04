@@ -17,9 +17,9 @@ router.post('/login', function(req, res, next) {
 
 router.post('/register', function(req, res, next) {
     console.log('/user/register');
-    console.log(req.params);
+    console.log(req.body);
 
-    var msg = userFunction.register(req.query['username'], req.query['password']);
+    var msg = userFunction.register(req.body['username'], req.body['password']);
     if (msg['err']) {//错误
         res.status(403).send(msg['err']);
     } else {//正确send jwt
