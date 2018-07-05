@@ -21,8 +21,8 @@ router.post('/upload', function(req, res) {
     var image = req.body['image'];
     console.log('user ' + username +' upload image.');
     console.log(image);
-    
-    var buffer = new Buffer(image, 'base64');
+    var basecode = image.split('base64,')[1];
+    var buffer = new Buffer(basecode, 'base64');
     var parser = exif.create(buffer);
     var result = parser.parse();
 
