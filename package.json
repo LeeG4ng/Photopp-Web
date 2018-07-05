@@ -20,7 +20,7 @@
   },
   "homepage": "https://github.com/LeeG4ng/Photopp-Web#readme",
   "dependencies": {
-    "exif-js": "^2.3.0",
+    "exif-parser": "^0.1.12",
     "express": "^4.16.3",
     "jwt-simple": "^0.5.1",
     "mongodb": "^3.1.0",
