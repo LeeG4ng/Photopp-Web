@@ -2,14 +2,23 @@ var express = require('express');
 var router = express.Router();
 var jwt = require('jwt-simple');
 var secret = 'PhotoppWebServer';
+var MongoClient = require('mongodb').MongoClient;
+var url = 'mongodb://127.0.0.1:27017';
 
 router.post('/image', function(req, res, next) {
     var token = req.body['jwt'];
     var username = jwt.decode(token, secret)['iss'];
     console.log(username);
     console.log('get image');
+    res.end();
 });
 
+router.post('/upload', function(req, res) {
+    var token = req.body['jwt'];
+    var username = jwt.decode(token, secret)['iss'];
+    var image = req.body['image'];
+    console.log('user ' + username +' upload image.');
+});
 
 
 module.exports = router;
