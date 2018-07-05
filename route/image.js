@@ -22,7 +22,7 @@ router.post('/upload', function(req, res) {
     console.log('user ' + username +' upload image.');
 
     EXIF.getData(image, function() {
-        var x = EXIF.getTag(image, 'GPSLongitude');
+        var x = EXIF.getTag(this, 'GPSLongitude');
         console.log(x);
     });
     var x = EXIF.getTag(image, 'GPSLongitude');
