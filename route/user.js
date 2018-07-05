@@ -7,9 +7,29 @@ var secret = 'PhotoppWebServer';
 
 router.post('/login', function(req, res, next) {
     console.log('/user/login');
-    console.log(req.query);
+    console.log(req.body);
 
-    var msg = userFunction.login(req.query['username'], req.query['password']);
+    MongoClient.connect(url, function(err, db) {
+        if (err) throw err;
+        var dbase = db.db('Photopp');
+        console.log('db connected');
+        var col = dbase.collection('user');
+        col.find({'username':req.body['username']}.toArray(function(finderr, results) {
+            if (finderr) throw finderr;
+            if (results.length === 0) {//用户不存在
+                console.log('用户不存在');
+                res.status(403).json({'error':'用户不存在！', 'jwt':null});
+            } else if (results[0]['password'] != req.body['password']) {//密码错误
+                console.log('密码错误');
+                res.status(403).json({'error':'密码错误，请重新输入。','jwt':null});
+            } else {//登录成功
+                console.log('登录成功');
+                var token = jwt.encode({'iss':req.body['username']}, secret);
+                res.json({'error':null, 'jwt':token});
+            }
+            db.close();
+        }));
+    })
     if (msg['err']) {//错误
 
     } else {//正确send jwt
@@ -22,12 +42,12 @@ router.post('/register', function(req, res, next) {
     console.log(req.body);
 
     MongoClient.connect(url, function(err, db) {
-        if(err) throw err;
+        if (err) throw err;
         var dbase = db.db('Photopp');
         console.log('db connected');
         var col = dbase.collection('user');
-        col.find({'username':req.body['username']}).toArray(function(err, results) {
-            if (err) throw err;
+        col.find({'username':req.body['username']}).toArray(function(finderr, results) {
+            if (finderr) throw err;
             if(results.length > 0) {//用户名已存在
                 console.log('用户名已存在');
                 res.status(403).json({'error':'用户名已存在','jwt':null});
@@ -38,7 +58,7 @@ router.post('/register', function(req, res, next) {
                     console.log('注册成功：'+req.body['username']+' '+req.body['password']);
                 })
                 var token = jwt.encode({'iss':req.body['username']}, secret);
-                res.send({'error':null, 'jwt':token});
+                res.json({'error':null, 'jwt':token});
             }
             db.close();
         })
