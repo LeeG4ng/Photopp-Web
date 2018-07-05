@@ -2,6 +2,8 @@ var express = require('express');
 var router = express.Router();
 var MongoClient = require('mongodb').MongoClient;
 var url = 'mongodb://127.0.0.1:27017';
+var jwt = require('jwt-simple');
+var secret = 'PhotoppWebServer';
 
 router.post('/login', function(req, res, next) {
     console.log('/user/login');
@@ -35,7 +37,8 @@ router.post('/register', function(req, res, next) {
                     if(inserterr) throw inserterr;
                     console.log('注册成功：'+req.body['username']+' '+req.body['password']);
                 })
-                res.send({'error':null, 'jwt':null});
+                var token = jwt.encode({'iss':req.body['username']}, secret);
+                res.send({'error':null, 'jwt':token});
             }
             db.close();
         })
