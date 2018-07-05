@@ -27,8 +27,10 @@ router.post('/upload', function(req, res) {
     var result = parser.parse();
 
     console.log(result.tags);
-    var GPS = result.tags['GPSLongitude'].substring(0,9)+','+result.tags['GPSLatitude'].substring(0,9);
-    // var GPS = result.tags['GPSLongitude']+','+result.tags['GPSLatitude'];
+    var GPS1 = result.tags['GPSLongitude'];
+    var GPS2 = result.tags['GPSLatitude'];
+    var GPS = GPS1.substring(0, 9)+','+GPS2.substring(0, 9);
+
     res.send(GPS);
 });
 
