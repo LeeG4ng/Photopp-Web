@@ -5,7 +5,7 @@ var secret = 'PhotoppWebServer';
 var MongoClient = require('mongodb').MongoClient;
 var url = 'mongodb://127.0.0.1:27017';
 var request = require('request');
-require('exif-js');
+var EXIF = require('exif-js');
 
 router.post('/image', function(req, res, next) {
     var token = req.body['jwt'];
@@ -20,7 +20,7 @@ router.post('/upload', function(req, res) {
     var username = jwt.decode(token, secret)['iss'];
     var image = req.body['image'];
     console.log('user ' + username +' upload image.');
-
+    console.log(image);
     EXIF.getData(image, function() {
         var x = EXIF.getTag(this, 'GPSLongitude');
         console.log(x);
