@@ -5,7 +5,7 @@ var secret = 'PhotoppWebServer';
 var MongoClient = require('mongodb').MongoClient;
 var url = 'mongodb://127.0.0.1:27017';
 var request = require('request');
-var EXIF = require('exif-js');
+require('exif-js');
 
 router.post('/image', function(req, res, next) {
     var token = req.body['jwt'];
