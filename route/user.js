@@ -14,7 +14,7 @@ router.post('/login', function(req, res, next) {
         var dbase = db.db('Photopp');
         console.log('db connected');
         var col = dbase.collection('user');
-        col.find({'username':req.body['username']}.toArray(function(finderr, results) {
+        col.find({'username':req.body['username']}).toArray(function(finderr, results) {
             if (finderr) throw finderr;
             if (results.length === 0) {//用户不存在
                 console.log('用户不存在');
@@ -28,13 +28,8 @@ router.post('/login', function(req, res, next) {
                 res.json({'error':null, 'jwt':token});
             }
             db.close();
-        }));
-    })
-    if (msg['err']) {//错误
-
-    } else {//正确send jwt
-        res.send();
-    }
+        });
+    });
 });
 
 router.post('/register', function(req, res, next) {
@@ -61,7 +56,7 @@ router.post('/register', function(req, res, next) {
                 res.json({'error':null, 'jwt':token});
             }
             db.close();
-        })
+        });
     });
 });
 
