@@ -21,6 +21,7 @@
   "homepage": "https://github.com/LeeG4ng/Photopp-Web#readme",
   "dependencies": {
     "express": "^4.16.3",
+    "jwt-simple": "^0.5.1",
     "mongodb": "^3.1.0"
   }
 }
