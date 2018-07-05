@@ -24,7 +24,7 @@ router.post('/upload', function(req, res) {
     
     var buffer = new Buffer(image, 'base64');
     var parser = exif.create(buffer);
-    var result = parser.parser();
+    var result = parser.parse();
 
     console.log(result.tags);
     res.end();
