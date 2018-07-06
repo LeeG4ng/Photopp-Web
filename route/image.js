@@ -52,13 +52,16 @@ router.post('/upload', function(req, res) {
     
     // res.send(GPS);
 
-    var form = new FormData();
+    var form = new FformData();
     form.append('api_key', api_key);
     form.append('api_secret', api_secret);
     form.append('image_file', buffer);
     // var pramas = {api_key:api_key,api_secret:api_secret,'image_file':buffer,};
-    request.post({url:face_url, formData:form}, function(face_err, face_res, face_body) {
-        console.log(face_body);
+    // request.post({url:face_url, formData:form}, function(face_err, face_res, face_body) {
+    //     console.log(face_body);
+    // });
+    form.submit(face_url, function(errr, ress) {
+        console.log(ress);
     });
     res.end();
 });
