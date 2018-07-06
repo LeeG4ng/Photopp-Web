@@ -11,6 +11,7 @@ const map_key = '2c541c4ac6a4392c10bf0934274f44ff';
 const api_key = 'NER771cf0iCV_Mw_D6whO7BVZWdQe9jR';
 const api_secret = '0PIOsHqmIQpDC6eJhUJXpLMjAfPrA2I1'
 const face_url = 'https://api-cn.faceplusplus.com/facepp/v3/detect';
+var needle = require('needle');
 
 router.post('/image', function(req, res, next) {
     var token = req.body['jwt'];
@@ -57,12 +58,15 @@ router.post('/upload', function(req, res) {
     form.append('api_secret', api_secret);
     form.append('image_file', buffer);
     var pramas = {api_key:api_key,api_secret:api_secret,'image_file':buffer,};
-    request.post({url:face_url, formData:pramas}, function(face_err, face_res, face_body) {
-        console.log(face_body);
-    });
-    form.submit(face_url, function(errr, ress) {
-        console.log(ress.statusMessage);
-    });
+    // request.post({url:face_url, formData:pramas}, function(face_err, face_res, face_body) {
+    //     console.log(face_body);
+    // });
+    // form.submit(face_url, function(errr, ress) {
+    //     console.log(ress.statusMessage);
+    // });
+    needle.post(face_url, pramas, function(face_err, face_res) {
+        console.log(face_res.body);
+    })
     res.end();
 });
 
