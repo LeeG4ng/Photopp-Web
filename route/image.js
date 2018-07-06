@@ -34,6 +34,7 @@ router.post('/upload', function(req, res) {
     new exif(buffer, function(exif_error, exif_data) {
         if (exif_error) throw exif_error;
         console.log(exif_data);
+        console.log(exif_data['gps']);
     })
     // var result = parser.parse();
     // console.log(result);
