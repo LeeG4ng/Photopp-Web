@@ -61,7 +61,7 @@ router.post('/upload', function(req, res) {
     //     console.log(face_body);
     // });
     form.submit(face_url, function(errr, ress) {
-        console.log(ress);
+        console.log(ress.body);
     });
     res.end();
 });
