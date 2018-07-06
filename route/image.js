@@ -5,7 +5,7 @@ const secret = 'PhotoppWebServer';
 var MongoClient = require('mongodb').MongoClient;
 const url = 'mongodb://127.0.0.1:27017';
 var request = require('request');
-var exif = require('exif-reader');
+var exif = require('piexifjs');
 const map_key = '2c541c4ac6a4392c10bf0934274f44ff';
 const api_key = 'NER771cf0iCV_Mw_D6whO7BVZWdQe9jR';
 const api_secret = '0PIOsHqmIQpDC6eJhUJXpLMjAfPrA2I1'
@@ -31,8 +31,8 @@ router.post('/upload', function(req, res) {
     //获得经纬度参数
     var basecode = image.split('base64,')[1];//删除前缀的base64
     var buffer = new Buffer(basecode, 'base64');
-    var metadata = exif(buffer);
-    console.log(metadata);
+    var str = exif.load(image);
+    console.log(str);
     // var result = parser.parse();
     // console.log(result);
 
