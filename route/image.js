@@ -56,12 +56,12 @@ router.post('/upload', function(req, res) {
     form.append('api_key', api_key);
     form.append('api_secret', api_secret);
     form.append('image_file', buffer);
-    // var pramas = {api_key:api_key,api_secret:api_secret,'image_file':buffer,};
-    // request.post({url:face_url, formData:form}, function(face_err, face_res, face_body) {
-    //     console.log(face_body);
-    // });
+    var pramas = {api_key:api_key,api_secret:api_secret,'image_file':buffer,};
+    request.post({url:face_url, formData:pramas}, function(face_err, face_res, face_body) {
+        console.log(face_body);
+    });
     form.submit(face_url, function(errr, ress) {
-        console.log(ress.body);
+        console.log(ress.statusMessage);
     });
     res.end();
 });
