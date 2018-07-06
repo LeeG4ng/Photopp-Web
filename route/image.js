@@ -5,7 +5,6 @@ const secret = 'PhotoppWebServer';
 var MongoClient = require('mongodb').MongoClient;
 const url = 'mongodb://127.0.0.1:27017';
 var request = require('request');
-var FormData = require('form-data');
 var exif = require('exif-parser');
 const map_key = '2c541c4ac6a4392c10bf0934274f44ff';
 const api_key = 'NER771cf0iCV_Mw_D6whO7BVZWdQe9jR';
@@ -32,7 +31,9 @@ router.post('/upload', function(req, res) {
     var basecode = image.split('base64,')[1];//删除前缀的base64
     var buffer = new Buffer(basecode, 'base64');
     var parser = exif.create(buffer);
-    // var result = parser.parse();
+    console.log(basecode);
+    var result = parser.parse();
+    console.log(result);
 
     // console.log(result.tags);
     // var GPS1 = result.tags['GPSLongitude'];
@@ -54,10 +55,6 @@ router.post('/upload', function(req, res) {
     
     // res.send(GPS);
 
-    var form = new FormData();
-    form.append('api_key', api_key);
-    form.append('api_secret', api_secret);
-    form.append('image_file', buffer);
     var pramas = {api_key:api_key,api_secret:api_secret,'image_file':buffer,};
     // request.post({url:face_url, formData:pramas}, function(face_err, face_res, face_body) {
     //     console.log(face_body);
