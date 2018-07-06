@@ -64,6 +64,7 @@ router.post('/upload', function(req, res) {
     //     console.log(ress.statusMessage);
     // });
     needle.post(face_url, pramas, function(face_err, face_res) {
+        if(face_err) throw face_err;
         console.log(face_res.body);
     })
     res.end();
