@@ -32,8 +32,8 @@ router.post('/upload', function(req, res) {
     var basecode = image.split('base64,')[1];//删除前缀的base64
     var buffer = new Buffer(basecode, 'base64');
     var parser = exif.create(buffer);
-    var result = parser.parse();
-    console.log(result);
+    // var result = parser.parse();
+    // console.log(result);
 
     // console.log(result.tags);
     // var GPS1 = result.tags['GPSLongitude'];
