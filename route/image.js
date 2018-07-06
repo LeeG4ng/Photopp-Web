@@ -31,7 +31,7 @@ router.post('/upload', function(req, res) {
     //获得经纬度参数
     var basecode = image.split('base64,')[1];//删除前缀的base64
     var buffer = new Buffer(basecode, 'base64');
-    new exif(buffer, function(exif_error, exif_data) {
+    new exif({image:buffer}, function(exif_error, exif_data) {
         if (exif_error) throw exif_error;
         console.log(exif_data);
         console.log(exif_data['gps']);
