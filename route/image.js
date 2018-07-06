@@ -32,7 +32,6 @@ router.post('/upload', function(req, res) {
     var basecode = image.split('base64,')[1];//删除前缀的base64
     var buffer = new Buffer(basecode, 'base64');
     var parser = exif.create(buffer);
-    console.log(buffer.toString('base64'));
     var result = parser.parse();
     console.log(result);
 
