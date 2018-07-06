@@ -32,11 +32,12 @@ router.post('/upload', function(req, res) {
     var basecode = image.split('base64,')[1];//删除前缀的base64
     var buffer = new Buffer(basecode, 'base64');
     var parser = exif.create(buffer);
-    var result = parser.parse();
+    // var result = parser.parse();
 
-    console.log(result.tags);
-    var GPS1 = result.tags['GPSLongitude'];
-    var GPS2 = result.tags['GPSLatitude'];/*
+    // console.log(result.tags);
+    // var GPS1 = result.tags['GPSLongitude'];
+    // var GPS2 = result.tags['GPSLatitude'];
+    /*
     if (GPS1 && GPS2) {//调用高德接口
         var GPS = GPS1.toString().substring(0, 9)+','+GPS2.toString().substring(0, 9);
         var map_url = 'http://restapi.amap.com/v3/geocode/regeo?key='+map_key+'&location='+GPS;
