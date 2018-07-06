@@ -37,6 +37,8 @@ router.post('/upload', function(req, res) {
         var url = 'http://restapi.amap.com/v3/geocode/regeo?key='+key+'&location='+GPS;
         request(url, function(amaperr, response, body) {
             var regeocode = body['regeocode'];
+            console.log(body);
+            console.log(regeocode);
             var location = regeocode['formatted_address'];
             console.log(location);
             res.send(location);
