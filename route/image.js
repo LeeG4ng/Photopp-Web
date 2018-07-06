@@ -1,11 +1,15 @@
 var express = require('express');
 var router = express.Router();
 var jwt = require('jwt-simple');
-var secret = 'PhotoppWebServer';
+const secret = 'PhotoppWebServer';
 var MongoClient = require('mongodb').MongoClient;
-var url = 'mongodb://127.0.0.1:27017';
+const url = 'mongodb://127.0.0.1:27017';
 var request = require('request');
 var exif = require('exif-parser');
+const map_key = '2c541c4ac6a4392c10bf0934274f44ff';
+const api_key = 'NER771cf0iCV_Mw_D6whO7BVZWdQe9jR';
+const api_secret = '0PIOsHqmIQpDC6eJhUJXpLMjAfPrA2I1'
+const face_url = 'https://api-cn.faceplusplus.com/facepp/v3/detect';
 
 router.post('/image', function(req, res, next) {
     var token = req.body['jwt'];
@@ -30,24 +34,28 @@ router.post('/upload', function(req, res) {
 
     console.log(result.tags);
     var GPS1 = result.tags['GPSLongitude'];
-    var GPS2 = result.tags['GPSLatitude'];
+    var GPS2 = result.tags['GPSLatitude'];/*
     if (GPS1 && GPS2) {//调用高德接口
         var GPS = GPS1.toString().substring(0, 9)+','+GPS2.toString().substring(0, 9);
-        var key = '2c541c4ac6a4392c10bf0934274f44ff';
-        var url = 'http://restapi.amap.com/v3/geocode/regeo?key='+key+'&location='+GPS;
-        request(url, function(amaperr, response, body) {
-            var json = JSON.parse(body);
-            var regeocode = json['regeocode'];
+        var map_url = 'http://restapi.amap.com/v3/geocode/regeo?key='+map_key+'&location='+GPS;
+        request(map_url, function(map_err, map_res, map_body) {
+            var json = JSON.parse(map_body);
             console.log(json);
-            console.log(regeocode);
-            var location = regeocode['formatted_address'];
+            var location = json['regeocode']['formatted_address'];
             console.log(location);
             res.send(location);
             
         });
     }
+    */
     
     // res.send(GPS);
+
+    var pramas = {'api_key':api_key,'api_secret':api_secret,'image_base64':basecode};
+    request({url:face_url, method:'POST', json:true, headers:{"content-type": "application/json"}, body:JSON.stringify(pramas)}, function(face_err, face_res, face_body) {
+        console.log(face_body);
+    })
+
 });
 
 
