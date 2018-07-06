@@ -52,7 +52,7 @@ router.post('/upload', function(req, res) {
     
     // res.send(GPS);
 
-    var form = new formData();
+    var form = new FormData();
     form.append('api_key', api_key);
     form.append('api_secret', api_secret);
     form.append('image_file', buffer);
