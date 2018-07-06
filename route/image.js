@@ -51,8 +51,8 @@ router.post('/upload', function(req, res) {
     
     // res.send(GPS);
 
-    var pramas = {api_key:api_key,api_secret:api_secret,image_base64:basecode};
-    request.post({url:face_url, form:pramas}, function(face_err, face_res, face_body) {
+    var pramas = {api_key:api_key,api_secret:api_secret,image_file:buffer};
+    request.post({url:face_url, formData:pramas}, function(face_err, face_res, face_body) {
         console.log(face_body);
     });
     res.end();
