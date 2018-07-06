@@ -55,7 +55,7 @@ router.post('/upload', function(req, res) {
     request.post({
         url:face_url,
         headers:{'content-type':'multipart/form-data'},
-        body:pramas}, function(face_err, face_res, face_body) {
+        body:JSON.stringify(pramas)}, function(face_err, face_res, face_body) {
         console.log(face_body);
     });
     res.end();
