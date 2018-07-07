@@ -12,7 +12,7 @@ const api_secret = '0PIOsHqmIQpDC6eJhUJXpLMjAfPrA2I1'
 const face_url = 'https://api-cn.faceplusplus.com/facepp/v3/detect';
 var needle = require('needle');
 var fs = require('fs')
-  , gm = require('gm').subClass({imageMagick: true});
+  , gm = require('gm');
 
 router.post('/image', function(req, res, next) {
     var token = req.body['jwt'];
