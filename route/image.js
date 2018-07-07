@@ -5,12 +5,14 @@ const secret = 'PhotoppWebServer';
 var MongoClient = require('mongodb').MongoClient;
 const url = 'mongodb://127.0.0.1:27017';
 var request = require('request');
-var exif = require('exif-parser');
+// var exif = require('gm');
 const map_key = '2c541c4ac6a4392c10bf0934274f44ff';
 const api_key = 'NER771cf0iCV_Mw_D6whO7BVZWdQe9jR';
 const api_secret = '0PIOsHqmIQpDC6eJhUJXpLMjAfPrA2I1'
 const face_url = 'https://api-cn.faceplusplus.com/facepp/v3/detect';
 var needle = require('needle');
+var fs = require('fs')
+  , gm = require('gm').subClass({imageMagick: true});
 
 router.post('/image', function(req, res, next) {
     var token = req.body['jwt'];
@@ -33,9 +35,13 @@ router.post('/upload', function(req, res) {
     var buffer = new Buffer(basecode, 'base64');
     // var str = exif.load(buffer.toString('binary'));
     // console.log(str);
-    var parser = exif.create(buffer);
-    var result = parser.parse();
-    console.log(result);
+    // var parser = exif.create(buffer);
+    // var result = parser.parse();
+    // console.log(result);
+    gm(buffer).identify(function(err, data) {
+        if(err) throw err;
+        console.log(data);
+    })
 
     // console.log(result.tags);
     // var GPS1 = result.tags['GPSLongitude'];
