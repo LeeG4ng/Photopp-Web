@@ -21,15 +21,10 @@
   "homepage": "https://github.com/LeeG4ng/Photopp-Web#readme",
   "dependencies": {
     "baidu-aip-sdk": "^2.3.3",
-    "exif": "^0.6.0",
-    "exif-parser": "^0.1.12",
-    "exif-reader": "^1.0.2",
     "express": "^4.16.3",
-    "gm": "^1.23.1",
     "jwt-simple": "^0.5.1",
     "mongodb": "^3.1.0",
     "needle": "^2.2.1",
-    "piexifjs": "^1.0.4",
     "request": "^2.87.0"
   }
 }

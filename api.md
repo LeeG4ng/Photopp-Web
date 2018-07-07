@@ -26,6 +26,7 @@
         request
             image|base64
             jwt|string
+            gps|string
         response
             id|
 /image/delete
