@@ -33,7 +33,7 @@ router.post('/upload', function(req, res) {
 
     var image_type = 'BASE64';
     face_client.detect(image, image_type).then(function(result) {
-        console.log(result['face_num']);
+        console.log(result.result.face_num);
     }).catch(function(face_err) {
         if (face_err) throw face_err;
     })
