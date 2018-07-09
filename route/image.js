@@ -35,11 +35,11 @@ router.post('/upload', function(req, res) {
     var GPS = req.body['GPS'];
 
     //获得经纬度参数
-    var basecode = image.split('base64,')[1];//删除前缀的base64
+    // var basecode = image.split('base64,')[1];//删除前缀的base64
     // var buffer = new Buffer(basecode, 'base64');
 
     var image_type = 'BASE64';
-    face_client.detect(basecode, image_type).then(function(result) {
+    face_client.detect(image, image_type).then(function(result) {
         console.log(JSON.stringify(result));
     }).catch(function(face_err) {
         if (face_err) throw face_err;
