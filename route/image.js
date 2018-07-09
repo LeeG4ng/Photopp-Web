@@ -38,6 +38,7 @@ router.post('/upload', function(req, res) {
         var face = false;
         if (result.result) face = true;
 
+        console.log(GPS);
         if (GPS) {//调用高德接口
             var map_url = 'http://restapi.amap.com/v3/geocode/regeo?key='+map_key+'&location='+GPS;
             request(map_url, function(map_err, map_res, map_body) {
