@@ -11,7 +11,6 @@ const map_key = '2c541c4ac6a4392c10bf0934274f44ff';
 // const face_url = 'https://api-cn.faceplusplus.com/facepp/v3/detect';
 var url = require('url');
 var crypto = require('crypto');
-var date = new Date().toUTCString()
 
 var AipFaceClient = require("baidu-aip-sdk").face;
 var APP_ID = '11501391';
@@ -85,7 +84,7 @@ router.post('/upload', function(req, res) {
         headers: {
             'accept': 'application/json',
             'content-type': 'application/json',
-            'date': date,
+            'date': new Date().toUTCString(),
             'Authorization': ''
         }
     };
