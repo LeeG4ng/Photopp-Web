@@ -19,7 +19,7 @@ router.post('/image', function(req, res, next) {
     // console.log(username);
     console.log('get image');
     console.log(req.body);
-    res.end();
+    res.send([1,2,3,4]);
 });
 
 router.post('/upload', function(req, res) {
@@ -75,5 +75,14 @@ router.post('/upload', function(req, res) {
     res.end();
 });
 
+router.post('/delete', function(req, res) {
+    console.log(req.body);
+    res.end();
+})
+
+router.post('/check', function(req, res) {
+    console.log(req.body);
+    res.end();
+})
 
 module.exports = router;
