@@ -35,6 +35,8 @@ router.post('/upload', function(req, res) {
     var image_type = 'BASE64';
     face_client.detect(image, image_type).then(function(result) {
         console.log(result);
+        var face = false;
+        if (result.result) face = true;
 
         if (GPS) {//调用高德接口
             var map_url = 'http://restapi.amap.com/v3/geocode/regeo?key='+map_key+'&location='+GPS;
@@ -49,7 +51,11 @@ router.post('/upload', function(req, res) {
                     var dbase = db.db('Photopp');
                     console.log('db connected');
                     var col = dbase.collection('image');
-
+                    col.insertOne({username:username,image:image,location:location,face:face},function(ins_err, ins_res) {
+                        if (ins_err) throw ins_err;
+                        console.log(username+'上传照片成功,位置:'+location+',人脸:'+face);
+                    });
+                    db.close();
                 });
             });
         } else {
@@ -58,7 +64,11 @@ router.post('/upload', function(req, res) {
                 var dbase = db.db('Photopp');
                 console.log('db connected');
                 var col = dbase.collection('image');
-                
+                col.insertOne({username:username,image:image,location:null,face:face},function(ins_err, ins_res) {
+                    if (ins_err) throw ins_err;
+                    console.log(username+'上传照片成功,无位置,人脸:'+face);
+                });
+                db.close();
             });
         }
 
