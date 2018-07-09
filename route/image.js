@@ -3,7 +3,7 @@ var router = express.Router();
 var jwt = require('jwt-simple');
 const secret = 'PhotoppWebServer';
 var MongoClient = require('mongodb').MongoClient;
-const dburl = 'mongodb://127.0.0.1:27017';
+const db_url = 'mongodb://127.0.0.1:27017';
 var request = require('request');
 const map_key = '2c541c4ac6a4392c10bf0934274f44ff';
 //BaiduFace
