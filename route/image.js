@@ -27,7 +27,8 @@ router.post('/image', function(req, res, next) {
 });
 
 router.post('/upload', function(req, res) {
-    console.log(req.body);
+    console.log(Object.keys(req.body));
+    
     var token = req.body['jwt'];
     // var username = jwt.decode(token, secret)['iss'];
     var image = req.body['image'];
@@ -39,12 +40,12 @@ router.post('/upload', function(req, res) {
     // var basecode = image.split('base64,')[1];//删除前缀的base64
     // var buffer = new Buffer(basecode, 'base64');
 
-    // var image_type = 'BASE64';
-    // face_client.detect(image, image_type).then(function(result) {
-    //     console.log(JSON.stringify(result));
-    // }).catch(function(face_err) {
-    //     if (face_err) throw face_err;
-    // })
+    var image_type = 'BASE64';
+    face_client.detect(image, image_type).then(function(result) {
+        console.log(JSON.stringify(result));
+    }).catch(function(face_err) {
+        if (face_err) throw face_err;
+    })
     /*
     if (GPS) {//调用高德接口
         var map_url = 'http://restapi.amap.com/v3/geocode/regeo?key='+map_key+'&location='+GPS;
@@ -75,6 +76,7 @@ router.post('/upload', function(req, res) {
 
     //ali
     // 这里填写AK和请求
+    /*
     var ak_id = 'LTAIsEwzch4Y4XXC';
     var ak_secret = 'IukfU6Spec5ZXBRnIFX1lzULAnxk0O';
     var options = {
@@ -125,7 +127,7 @@ router.post('/upload', function(req, res) {
         }
         console.log("step4-response body:", response.statusCode, body)
     }
-    request(options, callback);
+    request(options, callback);*/
     res.end();
 });
 
