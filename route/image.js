@@ -19,7 +19,7 @@ router.post('/image', function(req, res, next) {
     // console.log(username);
     console.log('get image');
     console.log(req.body);
-    res.send([1,2,3,4]);
+    res.send({arr:[1,2,3,4]});
 });
 
 router.post('/upload', function(req, res) {
@@ -44,14 +44,25 @@ router.post('/upload', function(req, res) {
                 console.log(json);
                 var location = json['regeocode']['formatted_address'];
                 console.log(location);
-                res.send(location);
+                MongoClient.connect(db_url, function(db_err, db) {
+                    if (db_err) throw db_err;
+                    var dbase = db.db('Photopp');
+                    console.log('db connected');
+                    var col = dbase.collection('image');
+
+                });
+            });
+        } else {
+            MongoClient.connect(db_url, function(db_err, db) {
+                if (db_err) throw db_err;
+                var dbase = db.db('Photopp');
+                console.log('db connected');
+                var col = dbase.collection('image');
                 
             });
         }
 
-        MongoClient.connect(db_url, function(db_err, db) {
-
-        });
+        
     }).catch(function(face_err) {
         if (face_err) throw face_err;
     })
