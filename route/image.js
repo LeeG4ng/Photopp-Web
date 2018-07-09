@@ -19,7 +19,7 @@ router.post('/image', function(req, res, next) {
     // console.log(username);
     console.log('get image');
     console.log(req.body);
-    res.send([1,2,3,{a:4}]);
+    res.send([{a:1},{a:2},{a:3},{a:4}]);
 });
 
 router.post('/upload', function(req, res) {

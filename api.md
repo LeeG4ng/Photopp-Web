@@ -38,7 +38,11 @@
             200 OK
             400 Bad Request
             error|string
-/image/check
-    GET
+/image/download
+    POST
         request
             jwt|string
+            id|array
+/image/classify
+    POST
+        re
