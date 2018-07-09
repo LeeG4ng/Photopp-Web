@@ -81,7 +81,7 @@ router.post('/upload', function(req, res) {
     var options = {
         url : 'https://dtplus-cn-shanghai.data.aliyuncs.com/face/detect',
         method: 'POST',
-        body: {type:1,content:image},
+        body: JSON.stringify({type:1,content:image}),
         headers: {
             'accept': 'application/json',
             'content-type': 'application/json',
