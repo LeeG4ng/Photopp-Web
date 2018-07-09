@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var MongoClient = require('mongodb').MongoClient;
-var url = 'mongodb://127.0.0.1:27017';
+var db_url = 'mongodb://127.0.0.1:27017';
 var jwt = require('jwt-simple');
 var secret = 'PhotoppWebServer';
 
@@ -9,8 +9,8 @@ router.post('/login', function(req, res, next) {
     console.log('/user/login');
     console.log(req.body);
 
-    MongoClient.connect(url, function(err, db) {
-        if (err) throw err;
+    MongoClient.connect(db_url, function(db_err, db) {
+        if (db_err) throw db_err;
         var dbase = db.db('Photopp');
         console.log('db connected');
         var col = dbase.collection('user');

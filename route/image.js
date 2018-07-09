@@ -14,10 +14,11 @@ var SECRET_KEY = '2gzMaFMaCuDuOrlOE6rKoF13jyXK0j04';
 var face_client = new AipFaceClient(APP_ID, API_KEY, SECRET_KEY);
 
 router.post('/image', function(req, res, next) {
-    var token = req.body['jwt'];
-    var username = jwt.decode(token, secret)['iss'];
-    console.log(username);
+    // var token = req.body['jwt'];
+    // var username = jwt.decode(token, secret)['iss'];
+    // console.log(username);
     console.log('get image');
+    console.log(req.body);
     res.end();
 });
 
@@ -34,6 +35,23 @@ router.post('/upload', function(req, res) {
     var image_type = 'BASE64';
     face_client.detect(image, image_type).then(function(result) {
         console.log(result);
+
+        if (GPS) {//调用高德接口
+            var map_url = 'http://restapi.amap.com/v3/geocode/regeo?key='+map_key+'&location='+GPS;
+            request(map_url, function(map_err, map_res, map_body) {
+                if (map_err) throw map_err;
+                var json = JSON.parse(map_body);
+                console.log(json);
+                var location = json['regeocode']['formatted_address'];
+                console.log(location);
+                res.send(location);
+                
+            });
+        }
+
+        MongoClient.connect(db_url, function(db_err, db) {
+
+        });
     }).catch(function(face_err) {
         if (face_err) throw face_err;
     })
