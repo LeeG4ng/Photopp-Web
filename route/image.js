@@ -30,7 +30,7 @@ router.post('/upload', function(req, res) {
     var token = req.body['jwt'];
     // var username = jwt.decode(token, secret)['iss'];
     var image = req.body['image'];
-    console.log('user ' + username +' upload image.');
+    // console.log('user ' + username +' upload image.');
     // console.log(image);
     var GPS = req.body['GPS'];
 
