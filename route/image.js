@@ -27,7 +27,7 @@ router.post('/image', function(req, res, next) {
 });
 
 router.post('/upload', function(req, res) {
-    // console.log(req.body);
+    console.log(req.body);
     var token = req.body['jwt'];
     // var username = jwt.decode(token, secret)['iss'];
     var image = req.body['image'];
