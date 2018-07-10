@@ -25,9 +25,9 @@ router.post('/image', function(req, res, next) {
 router.post('/upload', function(req, res) {
     
     var token = req.body['jwt'];
-    // var username = jwt.decode(token, secret)['iss'];
+    var username = jwt.decode(token, secret)['iss'];
     var image = req.body['image'];
-    // console.log('user ' + username +' upload image.');
+    console.log('user ' + username +' upload image.');
     // console.log(image);
     var GPS = req.body['GPS'];
 
@@ -100,11 +100,16 @@ router.post('/upload', function(req, res) {
 router.post('/delete', function(req, res) {
     console.log(req.body);
     res.end();
-})
+});
 
-router.post('/check', function(req, res) {
+router.post('/download', function(req, res) {
     console.log(req.body);
     res.end();
-})
+});
+
+router.post('/classify', function(req, res) {
+    console.log(req.body);
+    res.end();
+});
 
 module.exports = router;
