@@ -6,6 +6,7 @@ var MongoClient = require('mongodb').MongoClient;
 const db_url = 'mongodb://127.0.0.1:27017';
 var request = require('request');
 const map_key = '2c541c4ac6a4392c10bf0934274f44ff';
+var uuid = require('node-uuid');
 //BaiduFace
 var AipFaceClient = require("baidu-aip-sdk").face;
 var APP_ID = '11501391';
@@ -29,8 +30,11 @@ router.post('/upload', function(req, res) {
     var image = req.body['image'];
     console.log('user ' + username +' upload image.');
     // console.log(image);
-    var GPS = req.body['GPS'];
 
+    //生成id
+    var id = uuid.v1();
+
+    var GPS = req.body['GPS'];
 
     var image_type = 'BASE64';
     face_client.detect(image, image_type).then(function(result) {
@@ -52,9 +56,10 @@ router.post('/upload', function(req, res) {
                     var dbase = db.db('Photopp');
                     console.log('db connected');
                     var col = dbase.collection('image');
-                    col.insertOne({username:username,image:image,location:location,face:face},function(ins_err, ins_res) {
+                    col.insertOne({username:username,id:id,image:image,location:location,face:face},function(ins_err, ins_res) {
                         if (ins_err) throw ins_err;
                         console.log(username+'上传照片成功,位置:'+location+',人脸:'+face);
+                        res.send({id:id,location:location,face:face});
                     });
                     db.close();
                 });
@@ -65,9 +70,10 @@ router.post('/upload', function(req, res) {
                 var dbase = db.db('Photopp');
                 console.log('db connected');
                 var col = dbase.collection('image');
-                col.insertOne({username:username,image:image,location:null,face:face},function(ins_err, ins_res) {
+                col.insertOne({username:username,id:id,image:image,location:null,face:face},function(ins_err, ins_res) {
                     if (ins_err) throw ins_err;
                     console.log(username+'上传照片成功,无位置,人脸:'+face);
+                    res.send({id:id,location:null,face:face});
                 });
                 db.close();
             });
