@@ -8,7 +8,7 @@ var imageRouter = require('./route/image');
 app.set('port', process.env.PORT || 8086);
 app.listen(app.get('port'));
 
-app.use(bodyParser.json({limit: '50mb'}));
+// app.use(bodyParser.json({limit: '50mb'}));
 app.use(bodyParser.urlencoded({limit: '50mb', extended: false}));
 
 app.use('/user', userRouter);
