@@ -62,7 +62,6 @@ router.post('/upload', function(req, res) {
                         res.send({id:id,location:location,face:face});
                         db.close();
                     });
-                    
                 });
             });
         } else {
@@ -77,16 +76,11 @@ router.post('/upload', function(req, res) {
                     res.send({id:id,location:null,face:face});
                     db.close();
                 });
-                
             });
         }
-
-        
     }).catch(function(face_err) {
         if (face_err) throw face_err;
     })
-
-
 });
 
 router.post('/delete', function(req, res) {
@@ -95,9 +89,9 @@ router.post('/delete', function(req, res) {
 });
 
 router.post('/download', function(req, res) {
-    console.log('download pramas:'+req.body);
     var token = req.body['jwt'];
     var username = jwt.decode(token, secret)['iss'];
+    console.log(username+' post download.');
     var arr = req.body['array'];
     var downloadArr = [];
     MongoClient.connect(db_url, function(db_err, db) {
@@ -116,14 +110,12 @@ router.post('/download', function(req, res) {
             res.send(downloadArr);
         });
     });
-
-
 });
 
 router.post('/classify', function(req, res) {
-    console.log('classify pramas:'+req.body);
     var token = req.body['jwt'];
     var username = jwt.decode(token, secret)['iss'];
+    console.log(username+' post classify.');
     var arr = [];
     MongoClient.connect(db_url, function(db_err, db) {
         if (db_err) throw db_err;
@@ -138,7 +130,6 @@ router.post('/classify', function(req, res) {
             res.send(arr);
         });
     });
-
 });
 
 module.exports = router;
