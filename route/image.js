@@ -125,7 +125,6 @@ router.post('/classify', function(req, res) {
         var col = dbase.collection('image');
         col.find({username:username}).toArray(function(find_err, result) {
             if (find_err) throw find_err;
-            console.log(result);
             for (index = 0, len = result.length; index < len; index++) {
                 arr.push({id:result[index].id, location:result[index].location, face:result[index].face});
             }
