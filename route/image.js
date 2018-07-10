@@ -95,7 +95,7 @@ router.post('/delete', function(req, res) {
 });
 
 router.post('/download', function(req, res) {
-    console.log(req.body);
+    console.log('download pramas:'+req.body);
     var token = req.body['jwt'];
     var username = jwt.decode(token, secret)['iss'];
     var arr = req.body['array'];
@@ -110,9 +110,9 @@ router.post('/download', function(req, res) {
             for (index = 0, len = result.length; index < len; index++) {
                 if (arr.indexOf(result[index].id) === -1) {
                     downloadArr.push({image:result[index].image, id:result[index].id});
+                    console.log('download id:'+result[index].id);
                 }
             }
-            // console.log(downloadArr);
             res.send(downloadArr);
         });
     });
@@ -121,7 +121,7 @@ router.post('/download', function(req, res) {
 });
 
 router.post('/classify', function(req, res) {
-    console.log(req.body);
+    console.log('classify pramas:'+req.body);
     var token = req.body['jwt'];
     var username = jwt.decode(token, secret)['iss'];
     var arr = [];
@@ -135,10 +135,10 @@ router.post('/classify', function(req, res) {
             for (index = 0, len = result.length; index < len; index++) {
                 arr.push({id:result[index].id, location:result[index].location, face:result[index].face});
             }
+            res.send(arr);
         });
     });
 
-    res.end();
 });
 
 module.exports = router;
