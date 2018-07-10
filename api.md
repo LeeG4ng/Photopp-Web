@@ -28,12 +28,14 @@
             jwt|string
             gps|string
         response
-            id|
+            id|string
+            location|string
+            face|bool
 /image/delete
     POST
         request
             jwt|string
-            id|
+            id|string
         response
             200 OK
             400 Bad Request
@@ -52,4 +54,13 @@
             ]
 /image/classify
     POST
-        re
+        request
+            jwt|string
+        response
+            [
+                {
+                    id|string
+                    location|string
+                    face|bool
+                }
+            ]
