@@ -113,6 +113,7 @@ router.post('/download', function(req, res) {
                     downloadArr.push({image:img.image, id:img.id});
                 }
             }
+            console.log(downloadArr);
             res.send(downloadArr);
         });
     });
