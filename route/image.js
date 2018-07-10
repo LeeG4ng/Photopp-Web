@@ -107,8 +107,8 @@ router.post('/download', function(req, res) {
                     console.log('download id:'+result[index].id);
                 }
             }
-            res.send(downloadArr);
-            console.log(downloadArr);
+            res.json(downloadArr);
+            console.log(downloadArr.length);
             db.close();
         });
     });
