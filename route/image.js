@@ -110,6 +110,7 @@ router.post('/download', function(req, res) {
             console.log(result);
             for (var img in result) {
                 if (arr.indexOf(img.id) === -1) {
+                    console.log(img);
                     downloadArr.push({image:img.image, id:img.id});
                 }
             }
