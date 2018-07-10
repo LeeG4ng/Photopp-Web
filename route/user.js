@@ -36,7 +36,7 @@ router.post('/register', function(req, res, next) {
     console.log('/user/register');
     console.log(req.body);
 
-    MongoClient.connect(url, function(err, db) {
+    MongoClient.connect(db_url, function(err, db) {
         if (err) throw err;
         var dbase = db.db('Photopp');
         console.log('db connected');
