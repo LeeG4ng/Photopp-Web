@@ -43,6 +43,13 @@
         request
             jwt|string
             id|array
+        response
+            [
+                {
+                    id|str
+                    image|base64
+                }
+            ]
 /image/classify
     POST
         re

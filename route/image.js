@@ -110,11 +110,34 @@ router.post('/delete', function(req, res) {
 
 router.post('/download', function(req, res) {
     console.log(req.body);
-    res.end();
+    var token = req.body['jwt'];
+    var username = jwt.decode(token, secret)['iss'];
+    var arr = req.body['array'];
+    var downloadArr = [];
+    MongoClient.connect(db_url, function(db_err, db) {
+        if (db_err) throw db_err;
+        var dbase = db.db('Photopp');
+        console.log('db connected');
+        var col = dbase.collection('image');
+        col.find({username:username}).toArray(function(find_err, result) {
+            if (find_err) throw find_err;
+            for (var img in result) {
+                if (arr.indexOf(img.id) === -1) {
+                    downloadArr.push({image:img.image, id:img.id});
+                }
+            }
+            res.send(downloadArr);
+        });
+    });
+
+
 });
 
 router.post('/classify', function(req, res) {
     console.log(req.body);
+    var token = req.body['jwt'];
+
+
     res.end();
 });
 
