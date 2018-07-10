@@ -107,14 +107,12 @@ router.post('/download', function(req, res) {
         var col = dbase.collection('image');
         col.find({username:username}).toArray(function(find_err, result) {
             if (find_err) throw find_err;
-            console.log(result);
             for (index = 0, len = result.length; index < len; index++) {
                 if (arr.indexOf(result[index].id) === -1) {
-                    console.log(result[index]);
                     downloadArr.push({image:result[index].image, id:result[index].id});
                 }
             }
-            console.log(downloadArr);
+            // console.log(downloadArr);
             res.send(downloadArr);
         });
     });
@@ -125,7 +123,20 @@ router.post('/download', function(req, res) {
 router.post('/classify', function(req, res) {
     console.log(req.body);
     var token = req.body['jwt'];
-
+    var username = jwt.decode(token, secret)['iss'];
+    var arr = [];
+    MongoClient.connect(db_url, function(db_err, db) {
+        if (db_err) throw db_err;
+        var dbase = db.db('Photopp');
+        console.log('db connected');
+        var col = dbase.collection('image');
+        col.find({username:username}).toArray(function(find_err, result) {
+            if (find_err) throw find_err;
+            for (index = 0, len = result.length; index < len; index++) {
+                arr.push({id:result[index].id, location:result[index].location, face:result[index].face});
+            }
+        });
+    });
 
     res.end();
 });
