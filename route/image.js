@@ -108,6 +108,7 @@ router.post('/download', function(req, res) {
                 }
             }
             res.send(downloadArr);
+            console.log(downloadArr);
             db.close();
         });
     });
