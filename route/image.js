@@ -107,6 +107,7 @@ router.post('/download', function(req, res) {
         var col = dbase.collection('image');
         col.find({username:username}).toArray(function(find_err, result) {
             if (find_err) throw find_err;
+            console.log(result);
             for (var img in result) {
                 if (arr.indexOf(img.id) === -1) {
                     downloadArr.push({image:img.image, id:img.id});
