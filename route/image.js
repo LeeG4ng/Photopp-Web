@@ -108,7 +108,7 @@ router.post('/download', function(req, res) {
         col.find({username:username}).toArray(function(find_err, result) {
             if (find_err) throw find_err;
             console.log(result);
-            for (index = 0, len = result.length; index < len; i++) {
+            for (index = 0, len = result.length; index < len; index++) {
                 if (arr.indexOf(result[index].id) === -1) {
                     console.log(result[index]);
                     downloadArr.push({image:result[index].image, id:result[index].id});
