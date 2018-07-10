@@ -60,8 +60,9 @@ router.post('/upload', function(req, res) {
                         if (ins_err) throw ins_err;
                         console.log(username+'上传照片成功,位置:'+location+',人脸:'+face);
                         res.send({id:id,location:location,face:face});
+                        db.close();
                     });
-                    db.close();
+                    
                 });
             });
         } else {
@@ -74,8 +75,9 @@ router.post('/upload', function(req, res) {
                     if (ins_err) throw ins_err;
                     console.log(username+'上传照片成功,无位置,人脸:'+face);
                     res.send({id:id,location:null,face:face});
+                    db.close();
                 });
-                db.close();
+                
             });
         }
 
