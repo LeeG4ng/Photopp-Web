@@ -42,7 +42,8 @@ router.post('/upload', function(req, res) {
     var year = Number(req.body['year']);
     var month = Number(req.body['month']);
     var day = Number(req.body['day']);
-    console.log(year);
+
+    var time = year*365+month*30+day;
 
     var image_type = 'BASE64';
     face_client.detect(image, image_type).then(function(result) {
@@ -62,7 +63,7 @@ router.post('/upload', function(req, res) {
                     var dbase = db.db('Photopp');
                     console.log('db connected');
                     var col = dbase.collection('image');
-                    col.insertOne({username:username,id:id,image:image,location:location,face:face},function(ins_err, ins_res) {
+                    col.insertOne({username:username,id:id,image:image,location:location,face:face,time:time},function(ins_err, ins_res) {
                         if (ins_err) throw ins_err;
                         console.log(username+'上传照片成功,位置:'+location+',人脸:'+face);
                         res.send({id:id,location:location,face:face});
@@ -130,7 +131,7 @@ router.post('/classify', function(req, res) {
         var dbase = db.db('Photopp');
         console.log('db connected');
         var col = dbase.collection('image');
-        col.find({username:username}).toArray(function(find_err, result) {
+        col.find({username:username}).sort({time:-1}).toArray(function(find_err, result) {
             if (find_err) throw find_err;
             for (index = 0, len = result.length; index < len; index++) {
                 arr.push({id:result[index].id, location:result[index].location, face:result[index].face});
