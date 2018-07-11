@@ -48,9 +48,7 @@ router.post('/upload', function(req, res) {
             request(map_url, function(map_err, map_res, map_body) {
                 if (map_err) throw map_err;
                 var json = JSON.parse(map_body);
-                console.log(json);
                 var location = json['regeocode']['formatted_address'];
-                console.log(location);
                 MongoClient.connect(db_url, function(db_err, db) {
                     if (db_err) throw db_err;
                     var dbase = db.db('Photopp');
@@ -108,7 +106,7 @@ router.post('/download', function(req, res) {
                 }
             }
             res.json(downloadArr);
-            console.log(downloadArr.length);
+            console.log('download num:'+downloadArr.length);
             db.close();
         });
     });
