@@ -67,7 +67,7 @@ router.post('/upload', function(req, res) {
                         if (ins_err) throw ins_err;
                         console.log(username+'上传照片成功,位置:'+location+',人脸:'+face);
                         console.log(id);
-                        res.send({id:id,location:location,face:face});
+                        res.json({id:id,location:location,face:face});
                         db.close();
                     });
                 });
@@ -81,7 +81,7 @@ router.post('/upload', function(req, res) {
                 col.insertOne({username:username,id:id,image:image,location:null,face:face},function(ins_err, ins_res) {
                     if (ins_err) throw ins_err;
                     console.log(username+'上传照片成功,无位置,人脸:'+face);
-                    res.send({id:id,location:null,face:face});
+                    res.json({id:id,location:null,face:face});
                     console.log(id);
                     db.close();
                 });
@@ -138,7 +138,7 @@ router.post('/classify', function(req, res) {
             for (index = 0, len = result.length; index < len; index++) {
                 arr.push({id:result[index].id, location:result[index].location, face:result[index].face});
             }
-            res.send(arr);
+            res.json(arr);
             db.close();
         });
     });
