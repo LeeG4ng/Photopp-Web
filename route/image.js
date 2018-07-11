@@ -35,6 +35,10 @@ router.post('/upload', function(req, res) {
     var id = uuid.v1();
 
     var GPS = req.body['GPS'];
+    var year = Number(req.body['year']);
+    var month = Number(req.body['month']);
+    var day = Number(req.body['day']);
+    console.log(year);
 
     var image_type = 'BASE64';
     face_client.detect(image, image_type).then(function(result) {
