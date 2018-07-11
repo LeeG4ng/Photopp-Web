@@ -20,6 +20,10 @@ router.post('/image', function(req, res, next) {
     // console.log(username);
     console.log('get image');
     console.log(req.body);
+    var year = Number(req.body['year']);
+    var month = Number(req.body['month']);
+    var day = Number(req.body['day']);
+    console.log(year);
     res.send([{a:1},{a:2},{a:3},{a:4}]);
 });
 
